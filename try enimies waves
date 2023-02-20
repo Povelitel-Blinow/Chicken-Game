@@ -19,7 +19,8 @@ public class spawner : MonoBehaviour
     bool spawningWave;
 
     public int maxenemy;
-    
+    private bool endround;
+   
 
 
     // Update is called once per frame
@@ -27,40 +28,45 @@ public class spawner : MonoBehaviour
     {
         waven = 1;
         spawningWave = false;
-
+        endround = true;
     }
 
     void Update()
     {
 
 
-            if (enemyn < maxenemy)
-            {
-                //wave enemy
-                Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
+        if (enemyn < maxenemy && endround = true )
+        {
+            //wave enemy
+            Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
 
-                if (Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
-                {
-                    enemyn = enemyn + 1;
-                }
+            if (Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
+            {
+                enemyn = enemyn + 1;
+            }
 
             spawningWave = true;
-            }
+            endround = false;
+        }
 
 
 
 
-            if (spawningWave == false)
-            {
-                //wavy number
-                waven = waven + 1;
+        if (spawningWave == false)
+        {
+            //wavy number
+            waven = waven + 1;
 
-                maxenemy = maxenemy * 2;
+            maxenemy = maxenemy * 2;
 
-            }
+        }
 
+        int enemyspawn = GameObject.Find("butter");
+ 
 
-
-
+        if (enemyspawn = enemykill)
+        {
+            endround = true;
+        }
     }
 }
