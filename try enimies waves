@@ -13,43 +13,67 @@ public class spawner : MonoBehaviour
     public float Zrangemax;
 
     public int waven; //number of the wave
-
-    public float enemyn; // base enemies
+    
+    public float enemyn;
 
     bool spawningWave;
 
+    private int maxenemy = 11;
 
+    private bool boh;
+ 
     // Update is called once per frame
     void Start()
     {
-        waven = 1;
+        waven = 0;
+        spawningWave = false;
+        boh = true;
     }
 
     void Update()
     {
-        if(enemyn == 0)
+       
+        
+        
+            if (enemyn < maxenemy)
+            {
+                  //wave enemy
+                  Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
+                  if(Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
+                {
+                    enemyn = enemyn + 1;
+                }
+
+            }
+
+
+        if (enemyn > 0)
+        {
+            boh = false;
+        }
+        else
+        {
+            boh = true;
+        }
+
+
+
+
+
+
+
+        if (spawningWave == false)
         {
             //wavy number
             waven = waven + 1;
 
-            //stop wave bool
-            spawningWave = true;            
-        }
-        else
-        {
-            spawningWave = false;
+            maxenemy = maxenemy * waven;
+     
         }
 
+     
 
-        if (spawningWave == true)
-        {
-            //wave enemy
-            for (var enemyn = 0; enemyn < 10; enemyn++)
-            {
-                Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
-                Instantiate(Butter, RandomPlanePosition, Quaternion.identity);
-            }
-        }
+
     }
 
 }
