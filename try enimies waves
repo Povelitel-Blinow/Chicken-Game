@@ -4,67 +4,52 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
-
+    //object spawn
     public GameObject Butter;
+    //place spawn
     public float Xrangemin;
     public float Xrangemax;
     public float Zrangemin;
     public float Zrangemax;
 
-
     public int waven; //number of the wave
+
     public float enemyn; // base enemies
+
     bool spawningWave;
-    public float timeBetweenEnemySpawn;
-    public float timeBetweenWaves;
 
 
     // Update is called once per frame
     void Start()
     {
-        StartCoroutine(SpawnEnemyWave(waven));
+        waven = 1;
     }
-    
-    
-    
-    
-    
-    
-    
+
     void Update()
     {
-
-
-
-
-       
-
-        if (enemyn == 0 && !spawningWave)
+        if(enemyn == 0)
         {
-            waven++;
-            StartCoroutine(SpawnEnemyWave(waven));
+            //wavy number
+            waven = waven + 1;
+
+            //stop wave bool
+            spawningWave = true;            
+        }
+        else
+        {
+            spawningWave = false;
         }
 
-    }
 
-    IEnumerator SpawnEnemyWave(int enemiesToSpawn)
-    {
-        spawningWave = true;
-        yield return new WaitForSeconds(timeBetweenWaves); //We wait here to pause between wave spawning
-        for (int i = 0; i < enemiesToSpawn; i++)
+        if (spawningWave == true)
         {
-            Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
-            Instantiate(Butter, RandomPlanePosition, Quaternion.identity);
-            yield return new WaitForSeconds(timeBetweenEnemySpawn); //We wait here to give a bit of time between each enemy spawn
+            //wave enemy
+            for (var enemyn = 0; enemyn < 10; enemyn++)
+            {
+                Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
+                Instantiate(Butter, RandomPlanePosition, Quaternion.identity);
+            }
         }
-        spawningWave = false;
     }
-
-
-
-
-
-
 
 }
-
