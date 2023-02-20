@@ -18,7 +18,6 @@ public class spawner : MonoBehaviour
     public float timeBetweenEnemySpawn;
     public float timeBetweenWaves;
 
-    public Transform[] spawnPoints;
 
     // Update is called once per frame
     void Start()
