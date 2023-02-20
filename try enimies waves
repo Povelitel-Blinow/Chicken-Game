@@ -4,68 +4,69 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
-
+    //object spawn
     public GameObject Butter;
+    //place spawn
     public float Xrangemin;
     public float Xrangemax;
     public float Zrangemin;
     public float Zrangemax;
 
-
     public int waven; //number of the wave
-    public float enemyn; // base enemies
-    bool spawningWave;
-    public float timeBetweenEnemySpawn;
-    public float timeBetweenWaves;
 
-    public Transform[] spawnPoints;
+    private float enemyn;
+
+    bool spawningWave;
+
+    public int maxenemy;
+    private bool endround;
+   
+
 
     // Update is called once per frame
     void Start()
     {
-        StartCoroutine(SpawnEnemyWave(waven));
+        waven = 1;
+        spawningWave = false;
+        endround = true;
     }
-    
-    
-    
-    
-    
-    
-    
+
     void Update()
     {
 
 
-
-
-       
-
-        if (enemyn == 0 && !spawningWave)
+        if (enemyn < maxenemy && endround = true )
         {
-            waven++;
-            StartCoroutine(SpawnEnemyWave(waven));
-        }
-
-    }
-
-    IEnumerator SpawnEnemyWave(int enemiesToSpawn)
-    {
-        spawningWave = true;
-        yield return new WaitForSeconds(timeBetweenWaves); //We wait here to pause between wave spawning
-        for (int i = 0; i < enemiesToSpawn; i++)
-        {
+            //wave enemy
             Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
-            Instantiate(Butter, RandomPlanePosition, Quaternion.identity);
-            yield return new WaitForSeconds(timeBetweenEnemySpawn); //We wait here to give a bit of time between each enemy spawn
+
+            if (Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
+            {
+                enemyn = enemyn + 1;
+            }
+
+            spawningWave = true;
+            endround = false;
         }
-        spawningWave = false;
+
+
+
+
+        if (spawningWave == false)
+        {
+            //wavy number
+            waven = waven + 1;
+
+            maxenemy = maxenemy * 2;
+
+        }
+
+        int enemyspawn = GameObject.Find("butter");
+ 
+
+        if (enemyspawn = enemykill)
+        {
+            endround = true;
+        }
     }
-
-
-
-
-
-
-
 }
-
