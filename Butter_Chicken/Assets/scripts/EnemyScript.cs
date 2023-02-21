@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
+    public int enemykill;
 
     [SerializeField] Transform player;
     float maxHP;
@@ -14,7 +15,10 @@ public class EnemyScript : MonoBehaviour
     Vector3 direction;
 
     public static event Action OnEnemyKilled;
+    
+   
 
+    
     private void Awake() {
         movementSpeed = GlobalStats._instance.enemySpeed;
         maxHP = GlobalStats._instance.enemyHP;
@@ -34,10 +38,19 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
+    
     if (currentHP <= 0){
             Die();
+           
         }
+
+    if(currentHP <= 0)
+    {
+        enemykill = enemykill +1;
     }
+    }
+
+
 
     private void FixedUpdate(){
 
