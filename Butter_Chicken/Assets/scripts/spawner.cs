@@ -16,39 +16,46 @@ public class spawner : MonoBehaviour
 
     private float enemyn;
 
-    bool spawningWave;
+    private bool spawningWave;
 
     public int maxenemy;
-    private bool endround;
    
+   private int enemyspawn;
 
+    [SerializeField]
+    public EnemyScript EnemyScripts;
+
+
+    private bool endwave;
 
     // Update is called once per frame
     void Start()
     {
         waven = 1;
         spawningWave = false;
-        endround = true;
+        endwave = true;
     }
 
     void Update()
     {
 
-
-        if (enemyn < maxenemy && endround = true )
+        if(endwave == true && spawningWave == false)
         {
-            //wave enemy
-            Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
-
-            if (Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
+            if (enemyn < maxenemy)
             {
-                enemyn = enemyn + 1;
+                //wave enemy
+                Vector3 RandomPlanePosition = new Vector3(Random.Range(Xrangemin, Xrangemax), 5, Random.Range(Zrangemin, Zrangemax));
+
+             if (Instantiate(Butter, RandomPlanePosition, Quaternion.identity))
+                {
+                    enemyn = enemyn + 1;
+                    enemyspawn = enemyspawn + 1;
+                }
+
+                spawningWave = true;
+            
             }
-
-            spawningWave = true;
-            endround = false;
         }
-
 
 
 
@@ -60,13 +67,11 @@ public class spawner : MonoBehaviour
             maxenemy = maxenemy * 2;
 
         }
-
-        int enemyspawn = GameObject.Find("butter");
- 
-
-        if (enemyspawn = enemykill)
+        
+        if(enemyspawn == EnemyScripts.enemykill)
         {
-            endround = true;
+            endwave = true;
+           
         }
     }
 }
